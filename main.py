@@ -24,6 +24,12 @@ with ui.column().classes("w-full max-w-screen-xl mx-auto"):
         with ui.column().classes("w-6/12"):
             journal_timeline()
         with ui.column().classes("w-6/12 pl-6"):
-            ui.label("Form goes here")
+            with ui.card().classes("w-full max-w-md sticky top-4"):
+                ui.label("Add New Entry").classes("text-lg font-bold")
+                new_title = ui.input("Title").classes("w-full")
+                new_content = ui.textarea("Content").classes("w-full")
+                new_tags = ui.input("Tags (comma-separated)").classes("w-full")
+                ui.button("Add Entry")
+
 
 ui.run()
