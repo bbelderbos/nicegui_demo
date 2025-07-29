@@ -17,10 +17,9 @@ def journal_timeline():
             with ui.timeline_entry(
                 entry.content, title=entry.title, subtitle=entry.relative_date
             ):
-                with ui.row().classes("gap-2 flex-wrap"):
+                with ui.row().classes("gap-2"):
                     for tag in entry.tags:
-                        if tag.strip():
-                            ui.badge(tag)
+                        ui.badge(tag)
                 ui.button(
                     icon="delete",
                     on_click=lambda entry_id=entry.id: handle_delete_entry(entry_id),
