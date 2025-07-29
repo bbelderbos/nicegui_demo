@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-import os
 from uuid import uuid4
 import json
 from pathlib import Path
@@ -9,7 +8,6 @@ import humanize
 
 MAX_TITLE_LENGTH = 50
 MAX_CONTENT_LENGTH = 1000
-DEFAULT_DB_PATH = os.getenv("JOURNAL_DB_PATH", "journal.json")
 
 
 @dataclass

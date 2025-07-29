@@ -1,6 +1,23 @@
-def main():
-    print("Hello from nicegui-demo!")
+import os
+from pathlib import Path
+
+from nicegui import ui
+
+from backend import JournalDatabase
+
+db_path = os.getenv("JOURNAL_DB_PATH", "journal.json")
+db = JournalDatabase(Path(db_path))
 
 
-if __name__ == "__main__":
-    main()
+@ui.refreshable
+def journal_timeline():
+    entries = db.load_entries()
+    with ui.timeline(side="right"):
+        for entry in entries:
+            ui.timeline_entry(
+                entry.content, title=entry.title, subtitle=entry.relative_date
+            )
+
+
+journal_timeline()
+ui.run()
