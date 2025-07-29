@@ -14,9 +14,13 @@ def journal_timeline():
     entries = db.load_entries()
     with ui.timeline(side="right"):
         for entry in entries:
-            ui.timeline_entry(
+            with ui.timeline_entry(
                 entry.content, title=entry.title, subtitle=entry.relative_date
-            )
+            ):
+                ui.button(
+                    icon="delete",
+                    on_click=lambda entry_id=entry.id: handle_delete_entry(entry_id),
+                ).props("flat round dense color=red")
 
 
 def handle_add_entry(title_input, content_input, tags_input):
@@ -28,6 +32,12 @@ def handle_add_entry(title_input, content_input, tags_input):
     title_input.set_value("")
     content_input.set_value("")
     tags_input.set_value("")
+
+
+def handle_delete_entry(entry_id: str):
+    db.delete_entry(entry_id)
+    ui.notify("Entry deleted", type="negative")
+    journal_timeline.refresh()
 
 
 with ui.column().classes("w-full max-w-screen-xl mx-auto"):
