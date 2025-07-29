@@ -19,5 +19,11 @@ def journal_timeline():
             )
 
 
-journal_timeline()
+with ui.column().classes("w-full max-w-screen-xl mx-auto"):
+    with ui.row().classes("w-full flex-nowrap gap-4"):
+        with ui.column().classes("w-6/12"):
+            journal_timeline()
+        with ui.column().classes("w-6/12 pl-6"):
+            ui.label("Form goes here")
+
 ui.run()
