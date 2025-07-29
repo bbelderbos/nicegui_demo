@@ -44,7 +44,8 @@ class JournalDatabase:
         """Load entries from the journal database."""
         try:
             with open(self.db_file) as f:
-                return [JournalEntry(**e) for e in json.load(f)]  # type: ignore
+                _entries = [JournalEntry(**e) for e in json.load(f)]  # type: ignore
+                return sorted(_entries, key=lambda e: e.date, reverse=True)
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
