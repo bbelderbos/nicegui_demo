@@ -24,7 +24,7 @@ def handle_add_entry(title_input, content_input, tags_input):
     tags = [tag.strip() for tag in raw_tags if tag.strip()]
     db.add_entry(title=title_input.value, content=content_input.value, tags=tags)
     ui.notify("Entry added", type="positive")
-    # reset form
+    journal_timeline.refresh()
     title_input.set_value("")
     content_input.set_value("")
     tags_input.set_value("")
